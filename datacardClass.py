@@ -12,7 +12,7 @@ from decimal import *
 import json
 # from ROOT import *
 
-# from systematicsClass import *
+from systematicsClass import *
 from inputReader import *
 
 sys.path.append('./datacardInputs')
@@ -116,8 +116,8 @@ class datacardClass:
 
         ## ------------------------- SYSTEMATICS CLASSES ----------------------------- ##
     
-        # systematics = systematicsClass( self.mH, False, self.isFSR, theInputs)
-        # systematics_forXSxBR = systematicsClass( self.mH, True, self.isFSR,theInputs)
+        systematics = systematicsClass( self.mH, False, self.isFSR, theInputs)
+        systematics_forXSxBR = systematicsClass( self.mH, True, self.isFSR,theInputs)
 
         ## -------------------------- SIGNAL SHAPE ----------------------------------- ##
     
@@ -1130,8 +1130,8 @@ class datacardClass:
         
         ## --------------------------- DATACARDS -------------------------- ##
 
-        # systematics.setSystematics(bkgRate_qqzz_Shape, bkgRate_ggzz_Shape, bkgRate_zjets_Shape)
-        # systematics_forXSxBR.setSystematics(bkgRate_qqzz_Shape, bkgRate_ggzz_Shape,bkgRate_zjets_Shape)
+        systematics.setSystematics(bkgRate_qqzz_Shape, bkgRate_ggzz_Shape, bkgRate_zjets_Shape)
+        systematics_forXSxBR.setSystematics(bkgRate_qqzz_Shape, bkgRate_ggzz_Shape,bkgRate_zjets_Shape)
 
         ## If the channel is not declared in inputs, set rate = 0
         if not self.ggH_chan and not self.all_chan :  sigRate_ggH_Shape = 0
@@ -1162,8 +1162,8 @@ class datacardClass:
         fo = open( name_Shape, "wb")
         self.WriteDatacard(fo,theInputs, name_ShapeWS2, rates, data_obs.numEntries(), self.is2D )
         # if not self.bVBF:
-        # systematics.WriteSystematics(fo, theInputs)
-        # systematics.WriteShapeSystematics(fo,theInputs)
+        systematics.WriteSystematics(fo, theInputs)
+        systematics.WriteShapeSystematics(fo,theInputs)
         # else:
         #     systematics.WriteSystematics(fo, theInputs,self.VBFcat)
         #     systematics.WriteShapeSystematics(fo,theInputs)
@@ -1182,8 +1182,8 @@ class datacardClass:
         self.WriteDatacard(fo, theInputs,name_ShapeWS2, rates, data_obs.numEntries(), self.is2D )
         # else:
         #     self.WriteDatacard(fo,theInputs,name_ShapeWS2,rates,data_obs.numEntries(),self.is2D,False,"",True,self.VBFcat)
-        # systematics_forXSxBR.WriteSystematics(fo, theInputs)
-        # systematics_forXSxBR.WriteShapeSystematics(fo,theInputs)
+        systematics_forXSxBR.WriteSystematics(fo, theInputs)
+        systematics_forXSxBR.WriteShapeSystematics(fo,theInputs)
         fo.close()
 
 
